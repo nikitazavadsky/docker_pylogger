@@ -16,7 +16,7 @@ This project contains 2 docker services - logger and log observer implemented in
 
   Request example: `GET` 0.0.0.0:8005?text=TEST
 
-  * Run logger service:
+  * Run logger service (Don't forget to update `<ABSOLUTE PATH TO PROJECT>`, see Notes below):
   ```docker run --rm -it -v <ABSOLUTE PATH TO PROJECT>:/home/testuser -p 8005:8000 -d baseimage:v1 uvicorn main:app --reload --host 0.0.0.0```
   * Now you can check api documentation at http://localhost:8005/docs
   
@@ -27,9 +27,12 @@ This project contains 2 docker services - logger and log observer implemented in
   Log collector is an executable container:
 
   * Run:
-  ```docker run --rm -it -v <ABSOLUTE PATH TO PROJECT>:/home/testuser/ baseimage:v1 python log_collector.py```
+  ```docker run --rm -it -v <ABSOLUTE PATH TO PROJECT>:/home/testuser/ baseimage:v1 python3 log_collector.py```
   or
   * Double-click on `collect_logs.bat` in the project structure (Don't forget to update `<ABSOLUTE PATH TO PROJECT>`)
+  or
+  * Run .bat file with terminal: ```./collect_logs.bat```
 
+### Notes
 
 Example of `<ABSOLUTE PATH TO PROJECT>` variable: D:/Study/repos/docker_pylogger
