@@ -28,6 +28,8 @@ This project contains 2 docker services - logger and log observer implemented in
 
   * Run:
   ```docker run --rm -it -v <ABSOLUTE PATH TO PROJECT>:/home/testuser/ baseimage:v1 python log_collector.py```
+  or
+  * Double-click on `collect_logs.bat` in the project structure (Don't forget to update `<ABSOLUTE PATH TO PROJECT>`)
 
 
 Example of `<ABSOLUTE PATH TO PROJECT>` variable: D:/Study/repos/docker_pylogger
