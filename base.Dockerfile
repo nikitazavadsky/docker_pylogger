@@ -12,12 +12,12 @@ RUN apt-get update && apt-get install --no-install-recommends -y python3.9 pytho
 RUN pip3 install --no-cache-dir uvicorn fastapi 
 
 # Создаем пользователя и папку для него в /home/
-RUN useradd --create-home testuser
+RUN useradd --create-home -ms /bin/bash testuser
+
+RUN chown -R testuser:testuser /home/testuser
 
 USER testuser
 WORKDIR /home/testuser/
-
-EXPOSE 8000
 
 # Сообщения приложения отправляются напрямую консоль (отключение буферизации)
 ENV PYTHONUNBUFFERED=1

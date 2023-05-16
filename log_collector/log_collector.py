@@ -1,7 +1,7 @@
 import os
 
 def collect_logs():
-    logs_dir = "/home/testuser/logs"  # указываем папку с логами
+    logs_dir = os.path.join(os.getcwd(), "logs") # указываем папку с логами
     for foldername, subfolders, filenames in os.walk(logs_dir): # проход по всем папкам и файлам
         for filename in filenames:
             if filename.endswith(".log"): # Если файл имеет расширение .log

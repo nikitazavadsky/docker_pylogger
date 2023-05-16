@@ -6,8 +6,15 @@ This project contains 2 docker services - logger and log observer implemented in
 ### SETUP
 
   * Go to project directory
-  * Run image build command
-    ```docker image build -f Dockerfile -t baseimage:v1 . --no-cache```
+  * Run base image build command
+    ```docker image build -f base.Dockerfile -t baseimage:v1 .```
+  * Run logger image build command
+    ```docker image build -f logger.Dockerfile -t loggerimage:v1 .```
+  * Run log collector image build command
+    ```docker image build -f log-collector.Dockerfile -t logcollectorimage:v1 .```\
+  
+  * OR: launch bash script to build all images at once:
+    ```./build_all.sh```
 
 ### Logger
 
@@ -16,9 +23,12 @@ This project contains 2 docker services - logger and log observer implemented in
 
   Request example: `GET` 0.0.0.0:8005?text=TEST
 
-  * Run logger service (Don't forget to update `<ABSOLUTE PATH TO PROJECT>`, see Notes below):
-  ```docker run --rm -it -v <ABSOLUTE PATH TO PROJECT>:/home/testuser -p 8005:8000 -d baseimage:v1 uvicorn main:app --reload --host 0.0.0.0```
-  * Now you can check api documentation at http://localhost:8005/docs
+  * Run logger service:
+  ```docker run --rm -p 8005:8000 -v /$(pwd)/logs/:/home/testuser/logger/logs/ -it -d loggerimage:v1```
+  or
+  * Run bash script ```./launch_logger.sh```
+
+  * Now you can check api documentation at http://localhost:8005/docs and perform requests there
   
 ### Log reader
 
@@ -27,12 +37,6 @@ This project contains 2 docker services - logger and log observer implemented in
   Log collector is an executable container:
 
   * Run:
-  ```docker run --rm -it -v <ABSOLUTE PATH TO PROJECT>:/home/testuser/ baseimage:v1 python3 log_collector.py```
+  ```docker run --rm -v /$(pwd)/logs/:/home/testuser/logs/ -it logcollectorimage:v1```
   or
-  * Double-click on `collect_logs.bat` in the project structure (Don't forget to update `<ABSOLUTE PATH TO PROJECT>`)
-  or
-  * Run .bat file with terminal: ```./collect_logs.bat```
-
-### Notes
-
-Example of `<ABSOLUTE PATH TO PROJECT>` variable: D:/Study/repos/docker_pylogger
+  * Run bash script ```./collect_logs.sh```

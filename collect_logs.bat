@@ -1,1 +1,0 @@
-docker run --rm -it -v <ABSOLUTE PATH TO PROJECT>:/home/testuser/ baseimage:v1 python3 log_collector.py
